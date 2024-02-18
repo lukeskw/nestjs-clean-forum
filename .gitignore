@@ -58,3 +58,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Docker data volume
 data
+
+# JWT SECRET
+
+private_key.pem
+public_key.pem
