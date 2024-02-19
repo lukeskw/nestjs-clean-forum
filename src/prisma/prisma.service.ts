@@ -11,6 +11,7 @@ export class PrismaService
     super({
       log: ['warn', 'error'],
     })
+    this.client = new PrismaClient()
   }
 
   onModuleInit() {
