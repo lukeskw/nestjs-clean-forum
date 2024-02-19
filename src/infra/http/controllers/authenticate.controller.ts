@@ -11,6 +11,7 @@ import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { z } from 'zod'
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
 import { CredentialsDoesNotMatchException } from '@/domain/forum/application/use-cases/exceptions/credentials-does-not-match.exception'
+import { Public } from '@/infra/auth/public'
 
 const AuthenticateSchema = z.object({
   email: z.string().email(),
@@ -20,6 +21,7 @@ const AuthenticateSchema = z.object({
 type AuthenticateBodySchema = z.infer<typeof AuthenticateSchema>
 
 @Controller('/sessions')
+@Public()
 export class AuthenticateController {
   constructor(private authenticateStudent: AuthenticateStudentUseCase) {}
 
