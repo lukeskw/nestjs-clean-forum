@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   HttpCode,
@@ -6,11 +7,10 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { compare } from 'bcryptjs'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { z } from 'zod'
+import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
+import { CredentialsDoesNotMatchException } from '@/domain/forum/application/use-cases/exceptions/credentials-does-not-match.exception'
 
 const AuthenticateSchema = z.object({
   email: z.string().email(),
@@ -21,10 +21,7 @@ type AuthenticateBodySchema = z.infer<typeof AuthenticateSchema>
 
 @Controller('/sessions')
 export class AuthenticateController {
-  constructor(
-    private jwt: JwtService,
-    private prisma: PrismaService,
-  ) {}
+  constructor(private authenticateStudent: AuthenticateStudentUseCase) {}
 
   @Post()
   @HttpCode(201)
@@ -32,25 +29,20 @@ export class AuthenticateController {
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = AuthenticateSchema.parse(body)
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
-    })
+    const result = await this.authenticateStudent.execute({ email, password })
 
-    if (!user) {
-      throw new UnauthorizedException('User credentials do not match')
+    if (result.isLeft()) {
+      const error = result.value
+
+      switch (error.constructor) {
+        case CredentialsDoesNotMatchException:
+          throw new UnauthorizedException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
     }
 
-    const isPasswordsValid = await compare(password, user.password)
-
-    if (!isPasswordsValid) {
-      throw new UnauthorizedException('User credentials do not match')
-    }
-
-    const accessToken = this.jwt.sign({
-      sub: user.id,
-    })
+    const { accessToken } = result.value
 
     return {
       access_token: accessToken,
