@@ -3,7 +3,6 @@ import { EventHandler } from '@/core/events/event-handler'
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository'
 import { SendNotificationUseCase } from '../use-cases/send-notification'
 import { QuestionBestQuestionChosenEvent } from '@/domain/forum/enterprise/entities/events/question-best-answer-chosen'
-import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
 export class OnQuestionBestQuestionChosen implements EventHandler {
   constructor(
@@ -24,7 +23,7 @@ export class OnQuestionBestQuestionChosen implements EventHandler {
     question,
     bestAnswerId,
   }: QuestionBestQuestionChosenEvent) {
-    const answer: Answer = await this.answersRepository.findById(
+    const answer = await this.answersRepository.findById(
       bestAnswerId.toString(),
     )
 

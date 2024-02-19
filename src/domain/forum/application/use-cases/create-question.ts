@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { Either, right } from '@/core/either'
 import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
 import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
+import { Injectable } from '@nestjs/common'
 
 interface ICreateQuestionUseCaseRequest {
   studentId: string
@@ -18,7 +19,7 @@ type ICreateQuestionUseCaseResponse = Either<
     question: Question
   }
 >
-
+@Injectable()
 export class CreateQuestionUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
   async execute({
