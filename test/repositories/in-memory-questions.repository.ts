@@ -31,9 +31,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     if (!question) {
       return null
     }
-    return {
-      question,
-    }
+    return question
   }
 
   async findById(id: string) {
