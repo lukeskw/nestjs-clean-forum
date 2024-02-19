@@ -1,4 +1,4 @@
-import { QuestionsRepository } from '@/subdomains/forum/application/repositories/questions.repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository'
 import { Question } from '../../enterprise/entities/question'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { Either, right } from '@/core/either'

@@ -1,4 +1,4 @@
-import { AnswersRepository } from '@/subdomains/forum/application/repositories/answers.repository'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository'
 import { Answer } from '../../enterprise/entities/answer'
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFoundException } from '@/core/exceptions/exceptions/resource-not-found.exception'

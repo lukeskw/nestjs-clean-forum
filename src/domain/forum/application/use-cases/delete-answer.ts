@@ -1,5 +1,5 @@
 import { Either, left, right } from '@/core/either'
-import { AnswersRepository } from '@/subdomains/forum/application/repositories/answers.repository'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository'
 import { ResourceNotFoundException } from '@/core/exceptions/exceptions/resource-not-found.exception'
 import { UnauthorizedException } from '@/core/exceptions/exceptions/unauthorized.exception'
 

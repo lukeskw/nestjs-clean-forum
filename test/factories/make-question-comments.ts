@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import {
   QuestionComment,
   QuestionCommentProps,
-} from '@/subdomains/forum/enterprise/entities/question-comment'
+} from '@/domain/forum/enterprise/entities/question-comment'
 import { faker } from '@faker-js/faker'
 
 export function makeQuestionComment(

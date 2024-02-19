@@ -1,4 +1,4 @@
-import { QuestionsRepository } from '@/subdomains/forum/application/repositories/questions.repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
 import { QuestionCommentsRepository } from '../repositories/question-comments.repository'

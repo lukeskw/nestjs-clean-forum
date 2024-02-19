@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import {
   QuestionAttachment,
   QuestionAttachmentProps,
-} from '@/subdomains/forum/enterprise/entities/question-attachment'
+} from '@/domain/forum/enterprise/entities/question-attachment'
 export function makeQuestionAttachment(
   override: Partial<QuestionAttachmentProps> = {},
   id?: UniqueEntityID,
