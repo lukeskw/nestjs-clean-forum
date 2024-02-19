@@ -5,7 +5,7 @@ export type CommentProps = {
   authorId: UniqueEntityID
   content: string
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 export abstract class Comment<
   Props extends CommentProps,
@@ -24,6 +24,10 @@ export abstract class Comment<
 
   get summary() {
     return this.content.slice(0, 120).trimEnd().concat('...')
+  }
+
+  get createdAt() {
+    return this.props.createdAt
   }
 
   private setUpdatedAt() {
