@@ -33,3 +33,10 @@ Authorization: Bearer {{authToken}}
   "title": "New Question",
   "content": "New Question Content"
 }
+
+###
+
+# @name list-recent-questions
+GET {{baseUrl}}/questions?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
