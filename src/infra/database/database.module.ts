@@ -11,6 +11,11 @@ import { StudentsRepository } from '@/domain/forum/application/repositories/stud
 import { PrismaStudentsRepository } from './prisma/repositories/prisma-students.repository'
 import { PrismaNotificationsRepository } from './prisma/repositories/prisma-notifications-repository'
 import { NotificationsRepository } from '@/domain/notification/application/repositories/notifications.repository'
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments.repository'
+import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments.repository'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository'
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments.repository'
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments.repository'
 
 @Module({
   providers: [
@@ -23,11 +28,23 @@ import { NotificationsRepository } from '@/domain/notification/application/repos
       provide: StudentsRepository,
       useClass: PrismaStudentsRepository,
     },
-    PrismaQuestionAttachmentsRepository,
-    PrismaQuestionCommentsRepository,
-    PrismaAnswerAttachmentsRepository,
-    PrismaAnswerCommentsRepository,
-    PrismaAnswersRepository,
+    {
+      provide: QuestionAttachmentsRepository,
+      useClass: PrismaQuestionAttachmentsRepository,
+    },
+    {
+      provide: QuestionCommentsRepository,
+      useClass: PrismaQuestionCommentsRepository,
+    },
+    {
+      provide: AnswerAttachmentsRepository,
+      useClass: PrismaAnswerAttachmentsRepository,
+    },
+    {
+      provide: AnswerCommentsRepository,
+      useClass: PrismaAnswerCommentsRepository,
+    },
+    { provide: AnswersRepository, useClass: PrismaAnswersRepository },
     {
       provide: NotificationsRepository,
       useClass: PrismaNotificationsRepository,
@@ -37,11 +54,11 @@ import { NotificationsRepository } from '@/domain/notification/application/repos
     PrismaService,
     QuestionsRepository,
     StudentsRepository,
-    PrismaQuestionAttachmentsRepository,
-    PrismaQuestionCommentsRepository,
-    PrismaAnswerAttachmentsRepository,
-    PrismaAnswerCommentsRepository,
-    PrismaAnswersRepository,
+    QuestionAttachmentsRepository,
+    QuestionCommentsRepository,
+    AnswerAttachmentsRepository,
+    AnswerCommentsRepository,
+    AnswersRepository,
     NotificationsRepository,
   ],
 })
